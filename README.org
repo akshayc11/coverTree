@@ -1,0 +1,46 @@
+* Cover Tree for K nearest neighbor search in GPU
+
+** Introduction
+   This is an implementation of the cover tree data structure on the GPU.
+   The main purpose of this is to implement the cover tree data structure, 
+   and the related functions viz. Insert, delete and search of a cover tree
+
+*** Relevant Papers
+    The main paper for the implementation of this code is 
+    "Cover Trees for Nearest Neighbor" by Beygelzimer et al.
+
+    
+    Another paper that is relevant to this is
+    "Design and Implementation of the Cover Tree algorithm on CUDA compatible GPU"
+    by Sharma et al.
+
+
+** Description
+*** What is a cover tree?
+    A cover tree is a leveled tree where each level is a "cover" for the level below it.
+    Every node is associated with an integer
+    Every node has one point
+    Max children = c**4
+    Max depth = c**2 * log(n)
+    
+    It satisfies the following constraints:
+
+**** Nesting
+     Once a point appears in a level, it will appear in all lower levels
+
+**** Covering tree
+     For each point p in a lower level, there is a point q in the higher level such that the 
+     distance between p and q < 2**i and q will be a parent of p
+
+**** Separation
+     If there are two points in the same level i, then the distance between them is atleast 2**i
+
+**** Implicit tree
+     Every time a node has only itself as a child and itself as a perent, it can be eliminated
+
+
+
+** Algorithm
+
+*** Finding the nearest neighbor
+    defined at every level
