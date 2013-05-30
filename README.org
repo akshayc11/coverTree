@@ -42,5 +42,22 @@
 
 ** Algorithm
 
+*** Insertion
+
+**** Recursive algorithm: Insert(point p, cover set Q, level i)
+***** 1:  Initialize the data structure with the first point as the root node
+***** 2:  Calculate the distance of all the points wrt the root node point 
+***** 3:  Calculate the maximum distance to to find the scale
+***** 4:  Set Q = {Children(q) : q subset of Q_i}
+***** 5:  if d(p,Q) > 2**i 
+***** 6:      return "no parent found"
+***** 7:  else
+***** 8:      set Q_i-1 = q subset of Q : d(p,q)<= 2**i
+***** 9:      if Insert(p,Q_i-1, i-1) == "no parent found" and d(p,Q_i) <= 2**i
+***** 10:         pick q subset of Q_i such that d(p,q) <= 2**i
+***** 11:         insert p into Children(q)
+***** 12:         return "parent found"
+***** 13:     else return "no parent found"
 *** Finding the nearest neighbor
     defined at every level
+
