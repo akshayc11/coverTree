@@ -58,6 +58,35 @@
 ***** 11:         insert p into Children(q)
 ***** 12:         return "parent found"
 ***** 13:     else return "no parent found"
+
+**** Non Recursive batch insert as described by Sharma et al
+***** 1:   Create a linked list of the dataset
+***** 2:   Copy the dataset and the linkedList to the GPU global memory
+***** 3:   Find distance of first point to all the points and find the maximum distance
+***** 4:   Calculate the top level to place the root of the tree.
+***** 5:   Create a list Queue of lists to be processed at any level
+***** 6:   Find the threadID
+***** 7:   If (tid == 1) then
+***** 8:      make the first element as the root
+***** 9:      Make the root the supernode for the first member of the list Queue
+***** 10:  Synchronize all the threads
+***** 11:  While the list Queue is not empty 
+***** 12:      Synchronize all threads
+***** 13:      Calculate tid:
+***** 14:      While (tid < elements[Queue])
+***** 15:          if (head node of list != super node for this list)
+***** 16:              Calculate the distance of the head node of the list with all elements in the list
+***** 17:              if (Max distance is 0) then
+***** 18:                  Make all the elements of the list as the children of the supernode for this member of the queue
+***** 19:                  remove this list member from the Queue
+***** 20:              else:
+***** 21:                  Make the first element of this list as the child of the supernode for this list
+***** 22:                  Split the list into far list and near list for this level
+***** 23:                  Make the super node for this list the supernode for both the lists
+***** 24:                  Insert the far list in queue
+***** 25:              tid = tid + total number of threads
+***** 26: Copy the tree from device to host
+
 *** Finding the nearest neighbor
     defined at every level
 
